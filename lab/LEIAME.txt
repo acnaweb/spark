@@ -1,0 +1,14 @@
+# Projeto 3 - Apache Airflow e Apache Spark Para Extração e Processamento de Dados em Tempo Real
+
+# Crie as imagens
+docker compose build 
+
+# Crie os containers
+docker compose up -d
+
+# Crie a conexão para o spark na interface do Airflow como mostrado nas aulas no próximo capítulo.
+
+# Ative as Dags como mostrado nas aulas no próximo capítulo.
+
+
+# Nota: A fim de reduzir o tamanho do arquivo zip não vamos fornecer a pasta postgres_data. Ao executar o docker compose a pasta será criada automaticamente.
