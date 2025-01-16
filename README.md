@@ -1,10 +1,30 @@
-# Spart
+# Spark
 
+### Operate
 
+### Setup
+
+- .env.spark
+
+```sh
+SPARK_NO_DAEMONIZE=true
+```
+
+### Run
+
+```sh
+docker compose -f ./docker/custom/compose.yml up --build --scale spark-worker=5
+```
+
+### Navigate
+
+-  Spark Master
+
+http://localhost:9090
+
+-  History Server
+
+http://localhost:18080
 
 
 ## References
-
-- https://superuser.com/questions/816143/how-to-run-pip-in-non-interactive-mode
-- https://docs.pytest.org/en/stable/reference/customize.html
-- https://www.activestate.com/resources/quick-reads/how-to-manually-install-python-packages/

@@ -1,0 +1,25 @@
+@startmindmap
+
+title Spark
+footer Disponível em: https://github.com/acnaweb/aws
+
+*[#F8F8FF] Spark
+
+**[#LightGray] Features
+***_ Distributed Processing for Data Analytics
+***_ Python, Scala, Java, R, SQL
+***_ Batch/Realtime (streaming)
+
+**[#LightGray] Clusters
+***_ Alta disponibilidade
+***_ Balanceamento de carga
+***_ Computação de alto desempenho
+***_ Armazenamento
+
+**[#LightGray] Components
+***_ Spark SQL
+***_ Spark Streaming
+***_ MLib
+***_ GraphX
+
+@endmindmap
