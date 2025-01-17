@@ -15,8 +15,10 @@ services:
       - ./data:/opt/spark/data
       - ./jobs:/opt/spark/apps
       - spark-logs:/opt/spark/spark-events
-    env_file:
-      - .env.spark
+    # env_file:
+    #   - .env.spark
+    environment:
+      - SPARK_NO_DAEMONIZE=true
     ports:
       - '9090:8080'
       - '7077:7077'
@@ -27,8 +29,10 @@ services:
     entrypoint: ['./entrypoint.sh', 'history']
     depends_on:
       - spark-master
-    env_file:
-      - .env.spark
+    # env_file:
+    #   - .env.spark
+    environment:
+      - SPARK_NO_DAEMONIZE=true
     volumes:
       - spark-logs:/opt/spark/spark-events
     ports:
@@ -39,8 +43,10 @@ services:
     entrypoint: ['./entrypoint.sh', 'worker']
     depends_on:
       - spark-master
-    env_file:
-      - .env.spark
+    # env_file:
+    #   - .env.spark
+    environment:
+      - SPARK_NO_DAEMONIZE=true
     volumes:
       - ./data:/opt/spark/data
       - ./jobs:/opt/spark/apps
