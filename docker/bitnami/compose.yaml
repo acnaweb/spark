@@ -5,8 +5,10 @@ services:
     image: bitnami/spark:latest
     command: bin/spark-class org.apache.spark.deploy.master.Master
     ports:
-    - "9090:8080"
-    - "7077:7077"
+      - "9090:8080"
+      - "7077:7077"
+    volumes:
+      - spark-logs:/opt/bitnami/spark/logs    
 
   spark-worker:
     image: bitnami/spark:latest    
@@ -19,14 +21,19 @@ services:
       SPARK_WORKER_MEMORY: 2g
       SPARK_MASTER_URL: spark://spark-master:7077
 
-  # spark-history:
-  #   image: bitnami/spark:latest    
-  #   command: bin/spark-class org.apache.spark.deploy.history.HistoryServer
-  #   depends_on: 
-  #   - spark-master
-  #   environment:
-  #     SPARK_MODE: history      
-  #     SPARK_MASTER_URL: spark://spark-master:7077
-  #     SPARK_HISTORY_OPTS: '-Dspark.history.fs.logDirectory=/opt/bitnami/spark/logs -Dspark.eventLog.dir=/opt/bitnami/spark/logs -Dspark.eventLog.enabled=true -Dspark.history.fs.cleaner.enabled=true'      
-  #   ports:
-  #     - "18080:18080"
+  spark-history:
+    image: bitnami/spark:latest    
+    command: bin/spark-class org.apache.spark.deploy.history.HistoryServer
+    depends_on: 
+    - spark-master
+    environment:
+      SPARK_MODE: history      
+      SPARK_MASTER_URL: spark://spark-master:7077
+      SPARK_HISTORY_OPTS: '-Dspark.history.fs.logDirectory=/opt/bitnami/spark/logs -Dspark.eventLog.dir=/opt/bitnami/spark/logs -Dspark.eventLog.enabled=true -Dspark.history.fs.cleaner.enabled=true'      
+    ports:
+      - "18080:18080"
+    volumes:
+      - spark-logs:/opt/bitnami/spark/logs
+
+volumes:
+  spark-logs:

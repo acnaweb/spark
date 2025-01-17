@@ -1,0 +1,22 @@
+== Physical Plan ==
+AdaptiveSparkPlan isFinalPlan=false
++- Sort [ano#135 ASC NULLS FIRST, funcionario#134 ASC NULLS FIRST], true, 0
+   +- Exchange rangepartitioning(ano#135 ASC NULLS FIRST, funcionario#134 ASC NULLS FIRST, 200), ENSURE_REQUIREMENTS, [plan_id=732]
+      +- Project [ano#135, funcionario#134, total_unidades_vendidas#31, total_unidades_ano#27, round(((total_unidades_vendidas#31 / total_unidades_ano#27) * 100.0), 2) AS proporcional_func_ano#25]
+         +- BroadcastHashJoin [ano#135], [ano#18], Inner, BuildRight, false
+            :- HashAggregate(keys=[ano#135, funcionario#134], functions=[sum(unidades_vendidas#137)])
+            :  +- Exchange hashpartitioning(ano#135, funcionario#134, 200), ENSURE_REQUIREMENTS, [plan_id=719]
+            :     +- HashAggregate(keys=[ano#135, funcionario#134], functions=[partial_sum(unidades_vendidas#137)])
+            :        +- Filter isnotnull(ano#135)
+            :           +- FileScan csv [funcionario#134,ano#135,unidades_vendidas#137] Batched: false, DataFilters: [isnotnull(ano#135)], Format: CSV, Location: InMemoryFileIndex(1 paths)[file:/opt/spark/data/dados1_cap03.csv], PartitionFilters: [], PushedFilters: [IsNotNull(ano)], ReadSchema: struct<funcionario:string,ano:int,unidades_vendidas:double>
+            +- BroadcastExchange HashedRelationBroadcastMode(List(cast(input[0, int, true] as bigint)),false), [plan_id=728]
+               +- HashAggregate(keys=[ano#18], functions=[sum(total_unidades_vendidas#26)])
+                  +- Exchange hashpartitioning(ano#18, 200), ENSURE_REQUIREMENTS, [plan_id=725]
+                     +- HashAggregate(keys=[ano#18], functions=[partial_sum(total_unidades_vendidas#26)])
+                        +- HashAggregate(keys=[ano#18, funcionario#17], functions=[sum(unidades_vendidas#20)])
+                           +- Exchange hashpartitioning(ano#18, funcionario#17, 200), ENSURE_REQUIREMENTS, [plan_id=721]
+                              +- HashAggregate(keys=[ano#18, funcionario#17], functions=[partial_sum(unidades_vendidas#20)])
+                                 +- Filter isnotnull(ano#18)
+                                    +- FileScan csv [funcionario#17,ano#18,unidades_vendidas#20] Batched: false, DataFilters: [isnotnull(ano#18)], Format: CSV, Location: InMemoryFileIndex(1 paths)[file:/opt/spark/data/dados1_cap03.csv], PartitionFilters: [], PushedFilters: [IsNotNull(ano)], ReadSchema: struct<funcionario:string,ano:int,unidades_vendidas:double>
+
+

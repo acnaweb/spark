@@ -1,6 +1,26 @@
 # Spark
 
-### Operate
+## Modules
+
+### Spark Submit
+
+```sh
+docker exec spark-master spark-submit --deploy-mode client /opt/spark/apps/sql/projeto1-tarefa1.py
+docker exec spark-master spark-submit --deploy-mode client /opt/spark/apps/sql/projeto1-tarefa2.py
+docker exec spark-master spark-submit --deploy-mode client /opt/spark/apps/sql/projeto1-tarefa3.py
+docker exec spark-master spark-submit --deploy-mode client /opt/spark/apps/sql/projeto1-tarefa4.py
+docker exec spark-master spark-submit --deploy-mode client /opt/spark/apps/sql/projeto1-tarefa5.py
+
+docker exec spark-master spark-submit --deploy-mode cluster /opt/spark/apps/sql/projeto1-tarefa1.py
+```
+
+### Spark SQL
+
+```python
+
+```
+
+## Install & Config
 
 ### Setup
 
